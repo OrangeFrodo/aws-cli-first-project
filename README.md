@@ -1,6 +1,8 @@
 # AWS First project
 
+
 ## Resources created in vpc.tf
+
 This configuration includes:
   VPC: A single VPC (10.0.0.0/16) with public and private subnets.
   Public Subnets: Two public subnets with Internet Gateway connectivity.
@@ -65,6 +67,7 @@ Private Route Table
     Port Range: All
     Destination: 0.0.0.0/0 (unrestricted)
 
+
 ## Features in ec2.tf
 
 Features:
@@ -85,7 +88,8 @@ Features:
   Storage:
     Configures a 20GB root volume using the GP3 volume type
 
-# Resources created in alb.tf
+    
+## Resources created in alb.tf
 
 This configuration includes:
   Target Group:
