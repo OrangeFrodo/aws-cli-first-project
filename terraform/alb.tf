@@ -17,8 +17,8 @@ resource "aws_lb" "example_alb" {
   internal        = false # Public-facing ALB
   security_groups = [aws_security_group.alb_sg.id]
   subnets = [
-    aws_subnet.public_subnet[0].id,
-    aws_subnet.public_subnet[1].id
+    aws_subnet.public_subnet_1.id,
+    aws_subnet.public_subnet_2.id
   ]
   load_balancer_type = "application"
 

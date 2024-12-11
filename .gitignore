@@ -1,6 +1,9 @@
 # Local .terraform directories
 **/.terraform/*
 /home/orangefrodo/Dev/Work/Trustsoft/aws-cli-first-project/terraform/.terraform
+/sessionmanager-bundle.zip
+/sessionmanager-bundle
+/session-manager-plugin.deb
 
 # .tfstate files
 *.tfstate
