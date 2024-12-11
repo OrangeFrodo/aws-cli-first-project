@@ -1,3 +1,9 @@
-# KMS KEY
-# REMOTE BACKENT DYNAMO DB
-# ENCRYPTE THE DISK KMS
+terraform {
+  backend "s3" {
+    bucket         = "s3bucket-internship-jakub-12932"
+    key            = "terraform/state/terraform.tfstate" # Path in the bucket
+    region         = "eu-west-1"                      # Replace with your region
+    dynamodb_table = "terraform-locks-internship-jakub"
+    encrypt        = true
+  }
+}

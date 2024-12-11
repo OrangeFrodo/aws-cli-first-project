@@ -1,6 +1,6 @@
 # Create Security Group for the ALB
 resource "aws_security_group" "alb_sg" {
-  name = "ALBSecurityGroup_Internship_Jakub"
+  name   = "ALBSecurityGroup_Internship_Jakub"
   vpc_id = aws_vpc.main_vpc.id
 
   ingress {
