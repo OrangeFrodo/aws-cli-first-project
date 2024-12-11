@@ -1,5 +1,7 @@
 # AWS First project
+# Diagram
 
+Picture of diagram is in /attachments/image.png
 
 ## Resources created in vpc.tf
 
