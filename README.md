@@ -137,3 +137,54 @@ Registers EC2 instances with the Target Group to distribute traffic.
       Count: Registers two EC2 instances (count = 2).
       Target ID: Dynamically references aws_instance.web instances.
       Port: 80.
+
+## Resources in backend.tf
+
+1. Centralized State Management:
+  Stores the Terraform state file in an S3 bucket to enable collaboration between team members.
+  State file updates are automatically synchronized for all users.
+
+2. State Locking:
+  Uses a DynamoDB table (terraform-locks-internship-jakub) to lock the state file, preventing simultaneous updates and ensuring consistency.
+
+3. Encryption:
+  Encrypts the Terraform state file stored in the S3 bucket for added security.
+
+4. Customizable Path:
+  Allows storing the state file at a specific key path: terraform/state/terraform.tfstate.
+
+## Resources in backend/backend.tf
+
+1. S3 Bucket for Terraform State
+The aws_s3_bucket resource creates an S3 bucket to store the Terraform state file securely.
+Features:
+  Stores Terraform state files for centralized state management.
+  Includes tags for organization and environment identification.
+
+Key Attributes:
+  Bucket Name: s3bucket-internship-jakub-12932
+  Tags:
+      Name: TerraformStateBucket
+      Environment: production
+
+2. S3 Bucket Versioning
+The aws_s3_bucket_versioning resource enables versioning on the S3 bucket to maintain a history of state files. This helps recover from accidental deletions or state corruption.
+Key Attributes:
+  Versioning Status: Enabled
+
+3. Server-Side Encryption
+The aws_s3_bucket_server_side_encryption_configuration resource ensures the Terraform state file is encrypted using AWS Key Management Service (KMS).
+Key Attributes:
+  Encryption Type: aws:kms
+  KMS Key ARN: Dynamically references a KMS key (aws_kms_key.kms_key.arn).
+
+4. DynamoDB Table for State Locking
+The aws_dynamodb_table resource creates a DynamoDB table to manage state locks. This prevents simultaneous state modifications by multiple users or processes.
+Key Attributes:
+  Table Name: terraform-locks-internship-jakub
+  Billing Mode: PAY_PER_REQUEST
+  Partition Key: LockID (String)
+Tags:
+  Name: TerraformStateLocks
+  Environment: production
+
