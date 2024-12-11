@@ -1,7 +1,7 @@
 # AWS First project
 # Diagram
 
-Picture of diagram is in /attachments/image.png
+![Trustsoft_first_project drawio](https://github.com/user-attachments/assets/2b358b62-29b3-4daa-9f95-4202e3d121f2)
 
 ## Resources created in vpc.tf
 
@@ -38,7 +38,7 @@ Public Route Table
 
 Private Route Table
   Routes all traffic (0.0.0.0/0) through the NAT Gateway.
-  Associated with private subnets.  
+  Associated with private subnets.
 
 5. NAT Gateway
   Provides internet access to instances in private subnets.
