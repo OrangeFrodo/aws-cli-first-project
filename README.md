@@ -160,7 +160,6 @@ The aws_s3_bucket resource creates an S3 bucket to store the Terraform state fil
 Features:
   Stores Terraform state files for centralized state management.
   Includes tags for organization and environment identification.
-
 Key Attributes:
   Bucket Name: s3bucket-internship-jakub-12932
   Tags:
