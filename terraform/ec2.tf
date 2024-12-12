@@ -18,8 +18,6 @@ resource "aws_instance" "web" {
     instance_ip = count.index % 2 == 0 ? "10.0.3.90" : "10.0.4.90"
   })
 
-  ## sudo systemctl status apache2
-
   root_block_device {
     volume_size = 20
     volume_type = "gp3"

@@ -9,6 +9,12 @@
 aws ssm start-session --target <instance-id> --region eu-west-1
 ```
 
+## Trubleshoting in an instance
+
+```
+sudo systemctl status apache2
+```
+
 ## Resources created in vpc.tf
 
 This configuration includes:
