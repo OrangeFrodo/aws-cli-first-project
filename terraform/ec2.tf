@@ -9,20 +9,16 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.alb_sg.id] # Attach the EC2 security group
   iam_instance_profile   = aws_iam_instance_profile.ec2_instance.name
 
-  # Bootstrap script to install Nginx
+  private_ip = count.index % 2 == 0 ? "10.0.3.90" : "10.0.4.90"
+
+  # Bootstrap script to install Apache
   # Different index.html for each instance
   # THIS DOES NOT WORK !!!!!
-  user_data = <<EOT
-  #!/bin/bash
-  sudo apt-get update -y
-  sudo apt-get install apache2 -y
+  user_data = templatefile("bootstrap.sh", {
+    instance_ip = count.index % 2 == 0 ? "10.0.3.90" : "10.0.4.90"
+  })
 
-  mkdir -p /var/www/html
-  echo "<html><body><h1>Hello from EC2 instance ${count.index} </h1></body></html>" | sudo tee /var/www/html/index.html > /dev/null
-
-  sudo systemctl start apache2
-  sudo systemctl enable apache2
-  EOT
+  ## sudo systemctl status apache2
 
   root_block_device {
     volume_size = 20
