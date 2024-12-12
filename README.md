@@ -201,3 +201,21 @@ Tags:
   Name: TerraformStateLocks
   Environment: production
 
+## Resources created in kms/kms.tf
+
+1. KMS Key (`aws_kms_key.kms_key`)**
+   Description: `KMS Key for encrypting sensitive data`
+   Deletion Window: 30 days
+   Tags:
+     Name: `KMSKey_Internship_Jakub`
+     Environment: `Production`
+
+2. KMS Alias (`aws_kms_alias.kms_alias`)**
+   Name: `alias/kms-key_2`
+   Target Key ID: References the created KMS key.
+
+3. **KMS Key with Custom Policy (`aws_kms_key.kms_with_policy`)**
+   Description: `KMS Key with custom policy`
+   Policy Details:
+     Allows full KMS permissions for the root AWS account.
+     Grants specific actions (`Encrypt`, `Decrypt`, `GenerateDataKey*`, `DescribeKey`) to the IAM role `aws-controltower-AdministratorExecutionRole`.
