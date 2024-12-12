@@ -3,6 +3,12 @@
 
 ![Trustsoft_first_project drawio](https://github.com/user-attachments/assets/2b358b62-29b3-4daa-9f95-4202e3d121f2)
 
+## Connection to an instance
+
+```
+aws ssm start-session --target <instance-id> --region eu-west-1
+```
+
 ## Resources created in vpc.tf
 
 This configuration includes:
