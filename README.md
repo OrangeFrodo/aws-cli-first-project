@@ -169,6 +169,8 @@ Registers EC2 instances with the Target Group to distribute traffic.
 
 ## Resources in backend/backend.tf
 
+Preparation for terraform execution.
+
 1. S3 Bucket for Terraform State
 The aws_s3_bucket resource creates an S3 bucket to store the Terraform state file securely.
 Features:
@@ -219,3 +221,56 @@ Tags:
    Policy Details:
      Allows full KMS permissions for the root AWS account.
      Grants specific actions (`Encrypt`, `Decrypt`, `GenerateDataKey*`, `DescribeKey`) to the IAM role `aws-controltower-AdministratorExecutionRole`.
+
+# LOGS
+
+# Resources of logs in EC2
+
+1. IAM Role and Policies
+
+    aws_iam_role.vpc_flow_logs_role:
+        Creates an IAM role to allow VPC Flow Logs to assume the role.
+        Policy grants access to CloudWatch Logs.
+    aws_iam_role_policy.vpc_flow_logs_policy:
+        Attaches a policy to the IAM role for CloudWatch logging actions (CreateLogStream and PutLogEvents).
+
+2. CloudWatch Log Group
+
+    aws_cloudwatch_log_group.vpc_flow_logs_group:
+        Stores VPC flow logs.
+        Logs are retained for 3 days.
+
+3. VPC Flow Logs
+
+    aws_flow_log.vpc_flow_logs:
+        Captures all traffic for a specified VPC (vpc-05ed2154c78668d0b).
+        Logs are sent to the CloudWatch log group.
+
+4. SNS Topic for Alerts
+
+    aws_sns_topic.ec2_alerts_topic:
+        Creates an SNS topic for EC2 alerts.
+    aws_sns_topic_subscription:
+        Adds email subscriptions for notifications:
+            jakub.daxner@trustsoft.eu
+            adam.simo@trustsoft.eu
+
+5. CloudWatch Alarms
+
+    High CPU Utilization Alarm:
+        Triggers when CPU utilization exceeds 80% for 2 consecutive minutes.
+    High Disk Write Operations Alarm:
+        Triggers when Disk Write Ops exceed 1000 in 2 minutes.
+    High Memory Utilization Alarm:
+        Triggers when memory utilization exceeds 75% for 2 minutes.
+
+All alarms are tied to the SNS topic for notifications.
+
+6. CloudWatch Agent Configuration
+
+    aws_ssm_document.cloudwatch_config:
+        Configures the CloudWatch Agent on EC2 instances to collect system metrics (disk and memory).
+    aws_ssm_parameter.cloudwatch_config:
+        Stores CloudWatch Agent configuration in SSM Parameter Store.
+    aws_ssm_association.cloudwatch_agent:
+        Associates the configuration with the target EC2 instances.
