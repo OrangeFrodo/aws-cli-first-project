@@ -127,8 +127,8 @@ resource "aws_sns_topic_subscription" "email_subscription_2" {
   endpoint  = "adam.simo@trustsoft.eu"
 }
 
-resource "aws_cloudwatch_metric_alarm" "ec2_cpu_alarm" {
-  alarm_name          = "high-cpu-utilization-internship-jakub"
+resource "aws_cloudwatch_metric_alarm" "ec2_cpu_alarm_1" {
+  alarm_name          = "high-cpu-utilization-internship-jakub-1"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
   metric_name         = "CPUUtilization"
@@ -145,36 +145,18 @@ resource "aws_cloudwatch_metric_alarm" "ec2_cpu_alarm" {
   ok_actions      = [aws_sns_topic.ec2_alerts_topic.arn]
 }
 
-resource "aws_cloudwatch_metric_alarm" "ec2_disk_alarm" {
-  alarm_name          = "high-disk-utilization-internship-jakub"
+resource "aws_cloudwatch_metric_alarm" "ec2_cpu_alarm_2" {
+  alarm_name          = "high-cpu-utilization-internship-jakub-2"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
-  metric_name         = "DiskWriteOps"
+  metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
   period              = 60
   statistic           = "Average"
-  threshold           = 1000 # Example threshold for Disk Write Operations
-  alarm_description   = "This alarm triggers when Disk Write Ops exceed 1000 for 2 minutes."
+  threshold           = 80 # 80% CPU utilization
+  alarm_description   = "This alarm triggers when CPU utilization exceeds 80% for 2 minutes."
   dimensions = {
-    InstanceId = "i-070349fb6b2aee640"
-  }
-  actions_enabled = true
-  alarm_actions   = [aws_sns_topic.ec2_alerts_topic.arn]
-  ok_actions      = [aws_sns_topic.ec2_alerts_topic.arn]
-}
-
-resource "aws_cloudwatch_metric_alarm" "ec2_memory_alarm" {
-  alarm_name          = "high-memory-utilization-internship-jakub"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = 2
-  metric_name         = "MemoryUtilization"
-  namespace           = "System/Linux"
-  period              = 60
-  statistic           = "Average"
-  threshold           = 75 # 75% Memory utilization
-  alarm_description   = "This alarm triggers when Memory utilization exceeds 75% for 2 minutes."
-  dimensions = {
-    InstanceId = "i-070349fb6b2aee640"
+    InstanceId = "i-0ac127174124d1879"
   }
   actions_enabled = true
   alarm_actions   = [aws_sns_topic.ec2_alerts_topic.arn]

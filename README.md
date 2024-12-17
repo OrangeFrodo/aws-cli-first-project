@@ -224,7 +224,7 @@ Tags:
 
 # LOGS
 
-# Resources of logs in EC2
+## Resources of logs in EC2
 
 1. IAM Role and Policies
 
@@ -259,10 +259,6 @@ Tags:
 
     High CPU Utilization Alarm:
         Triggers when CPU utilization exceeds 80% for 2 consecutive minutes.
-    High Disk Write Operations Alarm:
-        Triggers when Disk Write Ops exceed 1000 in 2 minutes.
-    High Memory Utilization Alarm:
-        Triggers when memory utilization exceeds 75% for 2 minutes.
 
 All alarms are tied to the SNS topic for notifications.
 
