@@ -257,6 +257,10 @@ Tags:
 
     !! ERRROR !!
     SNS wont subscribe to email, so basicly this means they have probably some AWS API problem.
+    I have updated it to "email-json" but because of Wednesday (18.12.) tasks I don't want to type:
+    ```
+    terraform apply
+    ```
 
 5. CloudWatch Alarms
 

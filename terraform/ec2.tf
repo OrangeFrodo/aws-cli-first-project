@@ -117,13 +117,13 @@ resource "aws_sns_topic" "ec2_alerts_topic" {
 
 resource "aws_sns_topic_subscription" "email_subscription_1" {
   topic_arn = aws_sns_topic.ec2_alerts_topic.arn
-  protocol  = "email"
+  protocol  = "email-json"
   endpoint  = "jakub.daxner@trustsoft.eu"
 }
 
 resource "aws_sns_topic_subscription" "email_subscription_2" {
   topic_arn = aws_sns_topic.ec2_alerts_topic.arn
-  protocol  = "email"
+  protocol  = "email-json"
   endpoint  = "adam.simo@trustsoft.eu"
 }
 
