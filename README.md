@@ -255,6 +255,9 @@ Tags:
             jakub.daxner@trustsoft.eu
             adam.simo@trustsoft.eu
 
+    !! ERRROR !!
+    SNS wont subscribe to email, so basicly this means they have probably some AWS API problem.
+
 5. CloudWatch Alarms
 
     High CPU Utilization Alarm:

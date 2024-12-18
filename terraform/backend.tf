@@ -7,3 +7,20 @@ terraform {
     encrypt        = true
   }
 }
+
+resource "aws_s3_bucket" "postgres_backup" {
+  bucket = "my-postgres-backup-bucket-internship-jakub-12932"
+  acl    = "private"
+
+  versioning {
+    enabled = true
+  }
+
+  lifecycle_rule {
+    enabled = true
+
+    expiration {
+      days = 30
+    }
+  }
+}
