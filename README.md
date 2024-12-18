@@ -277,3 +277,35 @@ All alarms are tied to the SNS topic for notifications.
         Stores CloudWatch Agent configuration in SSM Parameter Store.
     aws_ssm_association.cloudwatch_agent:
         Associates the configuration with the target EC2 instances.
+
+# Troubleshooting exercises
+
+## 1. Task:
+  The customer is complaining that there is no more space on the server. First, try to expand the disk space. If that's not possible, then let me know why. If you have expanded the space (or failed to do so) and the disk is still full, then try to remove unnecessary files.
+
+  Basicle we needed to increase disk volume to connect via SSM, I have give it 50GB
+
+  Then we found big file size of a 22GB by
+  ```
+   find / -type f -size +200M -exec du -h {} + 2>/dev/null | sort -r -h
+  ```
+  
+  After that there was a file named ooo.sh which contained script to fill this file
+
+## 2. Task
+  The customer is again complaining that the server has high CPU usage. Try to determine what is causing the load and eliminate the problem.
+
+  We have located process which had been running as root and command yes
+  After killing it would start again.
+
+  Problem was there was a script and it had been executing same command over and over, we had to delete this file and reboot an instance
+
+## 3. Task
+  To make matters worse, the customer's servers are restarting, and we don't know why. Find the problem and fix it.
+
+  Cronjob which would reboot a machine every 30 minutes. Solution: Delete it.
+
+## 4. Task
+  The customer is complaining that an application has stopped running on the server and now cannot log into the server, even though it appears to still be running in AWS. Find the problem, fix it, get   it running, and try to determine why this happened.
+  
+  Unsolved, I have found out, it was a kernel problem but i wasn't able to solve it.
